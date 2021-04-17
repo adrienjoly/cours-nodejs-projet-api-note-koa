@@ -4,6 +4,7 @@ const router = new Router();
 const jwt = require("jsonwebtoken");
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://Raphael:Raphael@projetnode.n7g44.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const jwtKey = globals.JWT_KEY;
 const jwtExpirySeconds = 86400 //24h * 3600(sec dans une heure)
@@ -12,7 +13,7 @@ const users = {
     user1: "password1",
     user2: "password2",
 }
-
+//TODO : Change get in post
 router.get('/signin', async (ctx) => {
     if(!ctx.query.name || !ctx.query.password ){
         //ctx.body(401, 'erreur');
@@ -25,7 +26,6 @@ router.get('/signin', async (ctx) => {
         ctx.throw(400, 'Votre identifiant doit contenir entre 2 et 20 caractères' );
     }
 
-    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     client.connect(err => {
         const collection = client.db("notes-api").collection("users");
         // perform actions on the collection object
