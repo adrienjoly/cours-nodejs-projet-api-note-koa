@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/risrael-1/NodeJSProject#readme",
   "dependencies": {
-    "koa": "^2.13.1"
+    "koa": "^2.13.1",
+    "mongodb": "^3.6.6"
+  },
+  "engines": {
+    "node": ">=0.12.15"
   }
 }
