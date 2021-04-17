@@ -2,6 +2,8 @@ const globals = require('../globals'); //<< globals.js path
 const Router = require('koa-router');
 const router = new Router();
 const jwt = require("jsonwebtoken");
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://Raphael:Raphael@projetnode.n7g44.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 const jwtKey = globals.JWT_KEY;
 const jwtExpirySeconds = 86400 //24h * 3600(sec dans une heure)
@@ -13,8 +15,24 @@ const users = {
 
 router.get('/signin', async (ctx) => {
     if(!ctx.query.name || !ctx.query.password ){
-        ctx.throw(401, 'erreur');
+        //ctx.body(401, 'erreur');
+        ctx.throw(400, 'Il vous manque le login ou le mot de passe' );
     }
+    if(ctx.query.password.length < 4) {
+        ctx.throw(400, 'Le mot de passe doit contenir au moins 4 caractères' );
+    }
+    if(ctx.query.name.length < 2 || ctx.query.name.length > 20) {
+        ctx.throw(400, 'Votre identifiant doit contenir entre 2 et 20 caractères' );
+    }
+
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    client.connect(err => {
+        const collection = client.db("notes-api").collection("users");
+        // perform actions on the collection object
+        client.close();
+    });
+    
+
     // Get credentials from JSON body
     const username = ctx.query.name;
     const password = ctx.query.password;
