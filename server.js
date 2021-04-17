@@ -1,3 +1,4 @@
+const globals = require('./globals'); //<< globals.js path
 const Koa = require("koa");
 const app = new Koa();
 
@@ -6,7 +7,7 @@ app.use((ctx) => {
     ctx.body = "Hello World";
 });
 
-const PORT = 3000;
+const PORT = globals.PORT;
 
 app.listen(PORT, () => {
     console.log("Listening on port " + PORT);
