@@ -11,15 +11,16 @@ const users = {
     user2: "password2",
 }
 
-router.get('/singin', async (ctx) => {
-    // Get credentials from JSON body
-    const username = "user1";
-    const password = "password1";
-    if (!username || !password || users[username] !== password) {
-        // return 401 error is username or password doesn't exist, or if password does
-        // not match the password in our records
+router.get('/signin', async (ctx) => {
+    if(!ctx.query.name || !ctx.query.password ){
         ctx.throw(401, 'erreur');
     }
+    // Get credentials from JSON body
+    const username = ctx.query.name;
+    const password = ctx.query.password;
+
+
+
     // Create a new token with the username in the payload
     // and which expires 300 seconds after issue
     const token = jwt.sign({ username }, jwtKey, {
