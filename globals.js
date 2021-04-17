@@ -1,7 +1,7 @@
 var Variables = {
     'PORT':'3000',
     'MONGODB_URI' : 'nil',
-    'JWT_KEY' : 'nil',
+    'JWT_KEY' : '14CC562F993C2EE2453AE01943815D5E367A2AEE2EBBC1E4889BB830A040ED9C',
 }
 
 module.exports = Variables;
