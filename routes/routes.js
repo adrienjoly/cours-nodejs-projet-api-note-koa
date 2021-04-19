@@ -1,8 +1,10 @@
 const globals = require('../globals'); //<< globals.js path
 const Router = require('koa-router');
-const router = new Router();
 const jwt = require("jsonwebtoken");
 const MongoClient = require('mongodb').MongoClient;
+
+const router = new Router();
+
 const uri = "mongodb+srv://Raphael:Raphael@projetnode.n7g44.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -23,11 +25,18 @@ router.post('/signin', async (ctx) => {
     }else {
         ctx.status = 200;
         const username = res.name;
-        const password = res.password;
+
+        let options = {
+            httpOnly: true,
+            overwrite: true,
+            sameSite:true,
+            maxAge: 1000 * 60 * 60 * 24, // would expire after 24 hours
+        }
         const token = jwt.sign({username}, jwtKey, {
             algorithm: "HS256",
             expiresIn: jwtExpirySeconds,
         })
+        ctx.cookies.set('x-access-token', token, options);
         ctx.body = {token};
     }
 })
