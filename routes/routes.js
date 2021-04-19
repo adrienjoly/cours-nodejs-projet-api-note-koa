@@ -9,47 +9,30 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 const jwtKey = globals.JWT_KEY;
 const jwtExpirySeconds = 86400 //24h * 3600(sec dans une heure)
 
-const users = {
-    user1: "password1",
-    user2: "password2",
-}
-//TODO : Change get in post
-router.get('/signin', async (ctx) => {
-    if(!ctx.query.name || !ctx.query.password ){
-        //ctx.body(401, 'erreur');
+router.post('/signin', async (ctx) => {
+    let req = JSON.stringify(ctx.request.body);
+    let res = JSON.parse(req);
+    if(!res.name || !res.password ){
         ctx.throw(400, 'Il vous manque le login ou le mot de passe' );
     }
-    if(ctx.query.password.length < 4) {
+    if(res.password.length < 4) {
         ctx.throw(400, 'Le mot de passe doit contenir au moins 4 caractères' );
     }
-    if(ctx.query.name.length < 2 || ctx.query.name.length > 20) {
+    if(res.name.length < 2 || res.name.length > 20) {
         ctx.throw(400, 'Votre identifiant doit contenir entre 2 et 20 caractères' );
     }
-
-    client.connect(err => {
+    await client.connect(err => {
         const collection = client.db("notes-api").collection("users");
-        // perform actions on the collection object
         client.close();
     });
-    
-
     // Get credentials from JSON body
-    const username = ctx.query.name;
-    const password = ctx.query.password;
-
-
-
-    // Create a new token with the username in the payload
-    // and which expires 300 seconds after issue
+    const username = res.name;
+    const password = res.password;
     const token = jwt.sign({ username }, jwtKey, {
         algorithm: "HS256",
         expiresIn: jwtExpirySeconds,
     })
-    // set the cookie as the token string, with a similar max age as the token
-    // here, the max age is in milliseconds, so we multiply by 1000
-    //ctx.cookie("token", token, { maxAge: jwtExpirySeconds * 1000 })
-    //ctx.type = 'xml';
-    ctx.body = token;
+    ctx.body = {token};
 })
 
 router.get('/', async (ctx) => {
