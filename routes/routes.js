@@ -4,8 +4,8 @@ const jwt = require("jsonwebtoken");
 const MongoClient = require('mongodb').MongoClient;
 
 const router = new Router();
+const uri = globals.MONGODB_URI;
 
-const uri = "mongodb+srv://Raphael:Raphael@projetnode.n7g44.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const jwtKey = globals.JWT_KEY;
@@ -23,21 +23,32 @@ router.post('/signin', async (ctx) => {
     }else if(res.name.length < 2 || res.name.length > 20) {
         ctx.body = JSON.parse('{"error" : "Votre identifiant doit contenir entre 2 et 20 caractères"}');
     }else {
-        ctx.status = 200;
-        const username = res.name;
-
-        let options = {
-            httpOnly: true,
-            overwrite: true,
-            sameSite:true,
-            maxAge: 1000 * 60 * 60 * 24, // would expire after 24 hours
-        }
-        const token = jwt.sign({username}, jwtKey, {
-            algorithm: "HS256",
-            expiresIn: jwtExpirySeconds,
+        let tempName = "";
+        await client.connect();
+        const collection = client.db("notes-api").collection("users");
+        tempName = await collection.findOne({
+            username : res.name
         })
-        ctx.cookies.set('x-access-token', token, options);
-        ctx.body = {token};
+        if(tempName != null){
+            //TODO: Verifier si le mot de passe correspond a celui de l'utilisateur trouvé
+            ctx.status = 200;
+            const username = res.name;
+            let options = {
+                httpOnly: true,
+                overwrite: true,
+                sameSite:true,
+                maxAge: 1000 * 60 * 60 * 24, // would expire after 24 hours
+            }
+            const token = jwt.sign({username}, jwtKey, {
+                algorithm: "HS256",
+                expiresIn: jwtExpirySeconds,
+            })
+            ctx.cookies.set('x-access-token', token, options);
+            ctx.body = {token};
+        }else{
+            ctx.status = 403;
+            ctx.body = JSON.parse('{"error" : "Cet identifiant est inconnu"}');
+        }
     }
 })
 
