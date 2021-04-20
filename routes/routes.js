@@ -30,22 +30,25 @@ router.post('/signin', async (ctx) => {
         let tempName = await collection.findOne({
             username : res.name
         });
-        if(tempName != null && bcrypt.compare(res.password, tempName.password)){
-            //TODO: Verifier si le mot de passe correspond a celui de l'utilisateur trouvé
-            ctx.status = 200;
-            const username = res.name;
-            let options = {
-                httpOnly: true,
-                overwrite: true,
-                sameSite:true,
-                maxAge: 1000 * 60 * 60 * 24, // would expire after 24 hours
-            };
-            const token = jwt.sign({username}, jwtKey, {
-                algorithm: "HS256",
-                expiresIn: jwtExpirySeconds,
-            });
-            ctx.cookies.set('x-access-token', token, options);
-            ctx.body = {token};
+        if(tempName != null){
+            if(await bcrypt.compare(res.password, tempName.password)) {
+                ctx.status = 200;
+                const username = res.name;
+                let options = {
+                    httpOnly: true,
+                    overwrite: true,
+                    sameSite: true,
+                    maxAge: 1000 * 60 * 60 * 24, // would expire after 24 hours
+                };
+                const token = jwt.sign({username}, jwtKey, {
+                    algorithm: "HS256",
+                    expiresIn: jwtExpirySeconds,
+                });
+                ctx.cookies.set('x-access-token', token, options);
+                ctx.body = {token};
+            }else{
+                ctx.body = JSON.parse('{"error" : "null"}');
+            }
         }else{
             ctx.status = 403;
             ctx.body = JSON.parse('{"error" : "Cet identifiant est inconnu"}');
