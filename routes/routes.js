@@ -30,7 +30,7 @@ router.post('/signin', async (ctx) => {
         let tempName = await collection.findOne({
             username : res.name
         });
-        if(tempName != null){
+        if(tempName != null && bcrypt.compare(res.password, tempName.password)){
             //TODO: Verifier si le mot de passe correspond a celui de l'utilisateur trouvé
             ctx.status = 200;
             const username = res.name;
