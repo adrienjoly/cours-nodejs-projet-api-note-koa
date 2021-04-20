@@ -1,5 +1,6 @@
 -- Installation --
 
+$ npm init
 $ npm install
 
 
