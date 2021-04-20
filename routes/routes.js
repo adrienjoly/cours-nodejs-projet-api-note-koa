@@ -1,6 +1,7 @@
 const globals = require('../globals'); //<< globals.js path
 const Router = require('koa-router');
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const MongoClient = require('mongodb').MongoClient;
 
 const router = new Router();
@@ -73,9 +74,12 @@ router.post('/signup', async (ctx) => {
             username : res.name
         });
         if(tempName == null){
+            let salt = await bcrypt.genSalt(10)
+            let hash = await bcrypt.hashSync(res.password, salt);
+            console.log(hash);
             let insertUser = await collection.insertOne({
-                username : res.name
-                //password :
+                username : res.name,
+                password : hash
             });
             ctx.status = 200;
             const username = res.name;
