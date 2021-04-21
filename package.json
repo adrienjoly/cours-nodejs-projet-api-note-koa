@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "check": "npx eslint *.js & npx prettier --write *.js routes/*.js "
   },
   "repository": {
     "type": "git",
@@ -28,5 +28,9 @@
   },
   "engines": {
     "node": ">=0.12.15"
+  },
+  "devDependencies": {
+    "eslint": "^7.24.0",
+    "prettier": "^2.2.1"
   }
 }
