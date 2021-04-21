@@ -3,6 +3,9 @@ const Router = require("koa-router");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const MongoClient = require("mongodb").MongoClient;
+const { ObjectID } = require("bson");
+
+const functions = require("../functions")
 
 const router = new Router();
 const uri = globals.MONGODB_URI;
@@ -120,11 +123,91 @@ router.post("/signup", async (ctx) => {
   }
 });
 
+router.put("/note", async (ctx) => {
+    ctx.type = "json";
+    let req = JSON.stringify(ctx.request.body);
+    let res = JSON.parse(req);
+    if (res.content) {
+      var fullDate = functions.getCurrentDate()
+      await client.connect();
+      const collection = client.db("notes-api").collection("notes");
+      let insertNote = await collection.insertOne({
+        userId: 1111,
+        content: res.content,
+        createdAt: fullDate,
+        lastUpdatedAt: null,
+      });
+      console.log(insertNote.ops)
+      ctx.body = insertNote.ops; //TODO : ajouter note à l'objet json ;)
+    } else {
+      ctx.status = 400;
+      ctx.body = JSON.parse('{"error" : "null"}');
+    }
+  });
+
+router.patch("/notes/:id", async (ctx) => { // id pour test : 6080722285217938b037333e
+    ctx.type = "json";
+    let req = JSON.stringify(ctx.request.body);
+    let res = JSON.parse(req);
+    let noteID
+    try {
+        noteID = ObjectID(ctx.url.split("/")[2])
+    } catch (error) {
+        noteID = 0
+    }
+    await jwt.verify(ctx.header["x-access-token"],globals.JWT_KEY, async (err,decoded) => {
+        if (decoded) {
+            if(res.content){
+                await client.connect()
+                const usersCollection = await client.db("notes-api").collection("users")
+                const notesCollection = await client.db("notes-api").collection("notes")
+                let findedUser = await usersCollection.findOne({
+                    username: decoded.username,
+                });
+                if (findedUser) {
+                    const fullDate = functions.getCurrentDate()
+                    let beforeNote = await notesCollection.findOneAndUpdate(
+                        { _id : noteID},
+                        { $set : {
+                                content : res.content,
+                                lastUpdatedAt : fullDate
+                            }
+                        }
+                    )
+                    if (beforeNote.value) {
+                        const tmp = JSON.parse(JSON.stringify(beforeNote.value))
+                        tmp.content = res.content
+                        tmp.lastUpdatedAt = fullDate
+                        ctx.body = tmp
+                    }
+                    else{
+                        // L'id de la note dans l'url est invalide
+                        ctx.body = {"error" : "Cet identifiant est inconnu"}
+                        ctx.status = 404
+                    }
+                }else{
+                    // the decoded username is note found in API
+                    ctx.body = {"error" : null} 
+                    ctx.status = 400
+                }
+            }else{
+                // no content in request body
+                ctx.body = { "error" : null} 
+                ctx.status = 400
+            }
+        }else{
+            // Le token est invalide
+            ctx.body = { "error" : "Utilisateur non connecté"}
+            ctx.status = 401
+        }
+    })
+});
+
 router.get("/", async (ctx) => {
-  ctx.body = {
-    status: "success",
-    message: "hello, world!",
-  };
+    ctx.body = {
+        status: "success",
+        message: "hello, world!",
+    };
 });
 
 module.exports = router;
