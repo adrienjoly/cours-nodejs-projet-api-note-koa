@@ -104,6 +104,48 @@ router.post('/signup', async (ctx) => {
     }
 })
 
+router.put('/note', async (ctx) => {
+    ctx.type = 'json';
+    let req = JSON.stringify(ctx.request.body);
+    let res = JSON.parse(req);
+    if(res.content)
+    {
+        var d = new Date();
+        var date = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
+        var hours = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+        var fullDate = date+' '+hours;
+        await client.connect();
+        const collection = client.db("notes-api").collection("notes");
+        let insertNote = await collection.insertOne({
+            userId : 1111,
+            content : res.content,
+            createdAt : fullDate,
+            lastUpdatedAt : null
+        });  
+
+
+
+
+
+
+    }else{
+        ctx.status = 400;
+        ctx.body = JSON.parse('{"error" : "null"}');
+    }
+
+
+
+
+    ctx.body = {
+        if(token != await collection.findOne)
+        {
+            //res.send('"error" : "Utilisateur non connecté"', 401);
+            ctx.body = JSON.parse('{"error" : "Utilisateur non connecté"}');
+            ctx.status = 401;
+        }
+    };
+})
+
 router.get('/', async (ctx) => {
     ctx.body = {
         status: 'success',
