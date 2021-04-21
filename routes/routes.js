@@ -137,6 +137,7 @@ router.put("/note", async (ctx) => {
       createdAt: fullDate,
       lastUpdatedAt: null,
     });
+    ctx.body= insertNote.ops; //TODO : ajouter note à l'objet json ;)
   } else {
     ctx.status = 400;
     ctx.body = JSON.parse('{"error" : "null"}');
