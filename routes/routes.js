@@ -3,8 +3,6 @@ const Router = require("koa-router");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const MongoClient = require("mongodb").MongoClient;
-const { ObjectID } = require("bson");
-
 const functions = require("../functions")
 
 const router = new Router();
@@ -149,58 +147,131 @@ router.patch("/notes/:id", async (ctx) => { // id pour test : 6080722285217938b0
     ctx.type = "json";
     let req = JSON.stringify(ctx.request.body);
     let res = JSON.parse(req);
-    let noteID
-    try {
-        noteID = ObjectID(ctx.url.split("/")[2])
-    } catch (error) {
-        noteID = 0
+    let noteID = functions.getObjectIdFromTxt(ctx.url.split("/")[2])
+    if(!noteID){
+        ctx.body = {"error" : "Cet identifiant est inconnu"}
+        ctx.status = 404
+        return
     }
-    await jwt.verify(ctx.header["x-access-token"],globals.JWT_KEY, async (err,decoded) => {
-        if (decoded) {
-            if(res.content){
-                await client.connect()
-                const usersCollection = await client.db("notes-api").collection("users")
-                const notesCollection = await client.db("notes-api").collection("notes")
-                let findedUser = await usersCollection.findOne({
-                    username: decoded.username,
-                });
-                if (findedUser) {
-                    const fullDate = functions.getCurrentDate()
-                    let beforeNote = await notesCollection.findOneAndUpdate(
-                        { _id : noteID},
-                        { $set : {
-                                content : res.content,
-                                lastUpdatedAt : fullDate
-                            }
-                        }
-                    )
-                    if (beforeNote.value) {
-                        const tmp = JSON.parse(JSON.stringify(beforeNote.value))
-                        tmp.content = res.content
-                        tmp.lastUpdatedAt = fullDate
-                        ctx.body = tmp
-                    }
-                    else{
-                        // L'id de la note dans l'url est invalide
-                        ctx.body = {"error" : "Cet identifiant est inconnu"}
-                        ctx.status = 404
-                    }
-                }else{
-                    // the decoded username is note found in API
-                    ctx.body = {"error" : null} 
-                    ctx.status = 400
-                }
-            }else{
-                // no content in request body
-                ctx.body = { "error" : null} 
-                ctx.status = 400
-            }
-        }else{
-            // Le token est invalide
-            ctx.body = { "error" : "Utilisateur non connecté"}
-            ctx.status = 401
-        }
+
+    let decoded = await functions.decryptJwt(ctx.header["x-access-token"])
+    if (!decoded) {
+        ctx.body = { "error" : "Utilisateur non connecté"}
+        ctx.status = 401
+        return
+    }
+    
+    await client.connect()
+    const usersCollection = await client.db("notes-api").collection("users")
+    const notesCollection = await client.db("notes-api").collection("notes")
+
+    let findedUser = await usersCollection.findOne({
+        username: decoded.username
+    });
+
+    if (!findedUser) {
+        // the decoded username is note found in API
+        console.log("error : The decoded username is note found in API")
+        ctx.body = {"error" : null} 
+        ctx.status = 400
+        return
+    }
+
+    let note = await notesCollection.findOne({
+        _id : noteID
     })
+    console.log(note)
+    if (note) {
+        if(note.userId != findedUser._id){
+            ctx.body = {"error" : "Accès non autorisé à cette note"} 
+            ctx.status = 403
+            return
+        }
+    }else{
+        // la note n'existe pas
+        console.log("error : la note n'existe pas")
+        ctx.body = {"error" : null} 
+        ctx.status = 400
+        return
+    }
+
+    const fullDate = functions.getCurrentDate()
+    let beforeNote = await notesCollection.findOneAndUpdate(
+        { _id : noteID},
+        { $set : {
+                content : res.content,
+                lastUpdatedAt : fullDate
+            }
+        }
+    )
+    if (beforeNote.value) {
+        const tmp = JSON.parse(JSON.stringify(beforeNote.value))
+        tmp.content = res.content
+        tmp.lastUpdatedAt = fullDate
+        ctx.body = tmp
+    }else{
+        ctx.body = {"error" : "Cet identifiant est inconnu"}
+        ctx.status = 404
+        return
+    }
+});
+
+router.delete("/notes/:id", async (ctx) => { // id pour test : 6080722285217938b037333e
+    ctx.type = "json";
+
+    let noteID = functions.getObjectIdFromTxt(ctx.url.split("/")[2])
+    if(!noteID){
+        ctx.body = {"error" : "Cet identifiant est inconnu"}
+        ctx.status = 404
+        return
+    }
+
+    let decoded = await functions.decryptJwt(ctx.header["x-access-token"])
+    if (!decoded) {
+        ctx.body = { "error" : "Utilisateur non connecté"}
+        ctx.status = 401
+        return
+    }
+    
+    await client.connect()
+    const usersCollection = await client.db("notes-api").collection("users")
+    const notesCollection = await client.db("notes-api").collection("notes")
+
+    let findedUser = await usersCollection.findOne({
+        username: decoded.username
+    });
+    console.log(findedUser)
+    if (!findedUser) {
+        // the decoded username is note found in API
+        console.log("error : The decoded username is note found in API")
+        ctx.body = {"error" : null} 
+        ctx.status = 400
+        return
+    }
+
+    let note = await notesCollection.findOne({
+        _id : noteID
+    })
+    if (note) {
+        if(note.userId != findedUser._id){
+            ctx.body = {"error" : "Accès non autorisé à cette note"} 
+            ctx.status = 403
+            return
+        }
+    }else{
+        // la note n'existe pas
+        console.log("error : la note n'existe pas")
+        ctx.body = {"error" : null} 
+        ctx.status = 400
+        return
+    }
+
+    deletedNote = await notesCollection.findOneAndDelete(
+        { _id : noteID, userId : findedUser._id}
+    )
+    if (deletedNote.value) {
+        ctx.body = deletedNote.value
+    }
 });
 
 router.get("/", async (ctx) => {
