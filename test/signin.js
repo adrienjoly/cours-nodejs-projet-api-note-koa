@@ -5,14 +5,14 @@ chai.use(chaiHttp);
 describe("route : /signin", () => {
     it("all ok", async () => {
         chai.request("http://localhost:3000")
-        .post('/signin')
-        .send({
-            password: 'carrot', 
-            name: 'boby'
-        })
-        .end(function (err, res) {
-            assert.strictEqual(res.status, 200);
-        });
+            .post('/signin')
+            .send({
+                password: 'carrot',
+                name: 'boby'
+            })
+            .end(function (err, res) {
+                assert.strictEqual(res.status, 200);
+            });
     });
 
     it("password less than 4", async () => {
