@@ -3,7 +3,7 @@ const Router = require("koa-router");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const MongoClient = require("mongodb").MongoClient;
-const functions = require("../functions")
+const tools = require("../tools");
 
 const router = new Router();
 const uri = globals.MONGODB_URI;
@@ -95,7 +95,6 @@ router.post("/signup", async (ctx) => {
     if (tempName == null) {
       let salt = await bcrypt.genSalt(10);
       let hash = await bcrypt.hashSync(res.password, salt);
-      console.log(hash);
       let insertUser = await collection.insertOne({
         username: res.name,
         password: hash,
@@ -123,163 +122,206 @@ router.post("/signup", async (ctx) => {
 });
 
 router.put("/note", async (ctx) => {
-    ctx.type = "json";
-    let req = JSON.stringify(ctx.request.body);
-    let res = JSON.parse(req);
-    if (res.content) {
-      var fullDate = functions.getCurrentDate()
-      await client.connect();
-      const collection = client.db("notes-api").collection("notes");
-      let insertNote = await collection.insertOne({
-        userId: 1111,
-        content: res.content,
-        createdAt: fullDate,
-        lastUpdatedAt: null,
-      });
-      console.log(insertNote.ops)
-      ctx.body = insertNote.ops; //TODO : ajouter note à l'objet json ;)
-    } else {
-      ctx.status = 400;
-      ctx.body = JSON.parse('{"error" : "null"}');
-    }
-  });
-
-router.patch("/notes/:id", async (ctx) => { // id pour test : 6080722285217938b037333e
-    ctx.type = "json";
-    let req = JSON.stringify(ctx.request.body);
-    let res = JSON.parse(req);
-    let noteID = functions.getObjectIdFromTxt(ctx.url.split("/")[2])
-    if(!noteID){
-        ctx.body = {"error" : "Cet identifiant est inconnu"}
-        ctx.status = 404
-        return
-    }
-
-    let decoded = await functions.decryptJwt(ctx.header["x-access-token"])
-    if (!decoded) {
-        ctx.body = { "error" : "Utilisateur non connecté"}
-        ctx.status = 401
-        return
-    }
-    
-    await client.connect()
-    const usersCollection = await client.db("notes-api").collection("users")
-    const notesCollection = await client.db("notes-api").collection("notes")
-
+  ctx.type = "json";
+  let req = JSON.stringify(ctx.request.body);
+  let res = JSON.parse(req);
+  let decoded = await tools.decryptJwt(ctx.header.cookie.split("=")[1]);
+  if (!decoded) {
+    ctx.body = { error: "Utilisateur non connecté" };
+    ctx.status = 401;
+    return;
+  }
+  if (res.content) {
+    await client.connect();
+    const usersCollection = await client.db("notes-api").collection("users");
     let findedUser = await usersCollection.findOne({
-        username: decoded.username
+      username: decoded.username,
     });
-
     if (!findedUser) {
-        // the decoded username is note found in API
-        console.log("error : The decoded username is note found in API")
-        ctx.body = {"error" : null} 
-        ctx.status = 400
-        return
+      // the decoded username is note found in API
+      ctx.body = { error: null };
+      ctx.status = 400;
+      return;
     }
-
-    let note = await notesCollection.findOne({
-        _id : noteID
-    })
-    console.log(note)
-    if (note) {
-        if(note.userId != findedUser._id){
-            ctx.body = {"error" : "Accès non autorisé à cette note"} 
-            ctx.status = 403
-            return
-        }
-    }else{
-        // la note n'existe pas
-        console.log("error : la note n'existe pas")
-        ctx.body = {"error" : null} 
-        ctx.status = 400
-        return
-    }
-
-    const fullDate = functions.getCurrentDate()
-    let beforeNote = await notesCollection.findOneAndUpdate(
-        { _id : noteID},
-        { $set : {
-                content : res.content,
-                lastUpdatedAt : fullDate
-            }
-        }
-    )
-    if (beforeNote.value) {
-        const tmp = JSON.parse(JSON.stringify(beforeNote.value))
-        tmp.content = res.content
-        tmp.lastUpdatedAt = fullDate
-        ctx.body = tmp
-    }else{
-        ctx.body = {"error" : "Cet identifiant est inconnu"}
-        ctx.status = 404
-        return
-    }
+    var fullDate = tools.getCurrentDate();
+    const collection = client.db("notes-api").collection("notes");
+    let insertNote = await collection.insertOne({
+      userId: findedUser._id,
+      content: res.content,
+      createdAt: fullDate,
+      lastUpdatedAt: null,
+    });
+    ctx.body = insertNote.ops;
+  } else {
+    ctx.status = 400;
+    ctx.body = JSON.parse('{"error" : "null"}');
+  }
 });
 
-router.delete("/notes/:id", async (ctx) => { // id pour test : 6080722285217938b037333e
-    ctx.type = "json";
+router.get("/note", async (ctx) => {
+  ctx.type = "json";
+  let req = JSON.stringify(ctx.request.body);
+  let res = JSON.parse(req);
+  let decoded = await tools.decryptJwt(ctx.header.cookie.split("=")[1]);
+  if (!decoded) {
+    ctx.body = { error: "Utilisateur non connecté" };
+    ctx.status = 401;
+    return;
+  }
+  await client.connect();
+  const usersCollection = await client.db("notes-api").collection("users");
+  let findedUser = await usersCollection.findOne({
+    username: decoded.username,
+  });
+  if (!findedUser) {
+    // the decoded username is note found in API
+    ctx.body = { error: null };
+    ctx.status = 400;
+    return;
+  }
 
-    let noteID = functions.getObjectIdFromTxt(ctx.url.split("/")[2])
-    if(!noteID){
-        ctx.body = {"error" : "Cet identifiant est inconnu"}
-        ctx.status = 404
-        return
-    }
-
-    let decoded = await functions.decryptJwt(ctx.header["x-access-token"])
-    if (!decoded) {
-        ctx.body = { "error" : "Utilisateur non connecté"}
-        ctx.status = 401
-        return
-    }
-    
-    await client.connect()
-    const usersCollection = await client.db("notes-api").collection("users")
-    const notesCollection = await client.db("notes-api").collection("notes")
-
-    let findedUser = await usersCollection.findOne({
-        username: decoded.username
-    });
-    console.log(findedUser)
-    if (!findedUser) {
-        // the decoded username is note found in API
-        console.log("error : The decoded username is note found in API")
-        ctx.body = {"error" : null} 
-        ctx.status = 400
-        return
-    }
-
-    let note = await notesCollection.findOne({
-        _id : noteID
+  const collection = client.db("notes-api").collection("notes");
+  let allNotes = await collection
+    .find({
+      userId: tools.getObjectIdFromTxt(findedUser._id),
     })
-    if (note) {
-        if(note.userId != findedUser._id){
-            ctx.body = {"error" : "Accès non autorisé à cette note"} 
-            ctx.status = 403
-            return
-        }
-    }else{
-        // la note n'existe pas
-        console.log("error : la note n'existe pas")
-        ctx.body = {"error" : null} 
-        ctx.status = 400
-        return
-    }
+    .toArray();
+  ctx.body = allNotes;
+});
 
-    deletedNote = await notesCollection.findOneAndDelete(
-        { _id : noteID, userId : findedUser._id}
-    )
-    if (deletedNote.value) {
-        ctx.body = deletedNote.value
+router.patch("/notes/:id", async (ctx) => {
+  // id pour test : 6080722285217938b037333e
+  ctx.type = "json";
+  let req = JSON.stringify(ctx.request.body);
+  let res = JSON.parse(req);
+  let noteID = tools.getObjectIdFromTxt(ctx.url.split("/")[2]);
+  if (!noteID) {
+    ctx.body = { error: "Cet identifiant est inconnu" };
+    ctx.status = 404;
+    return;
+  }
+
+  let decoded = await tools.decryptJwt(ctx.header.cookie.split("=")[1]);
+  if (!decoded) {
+    ctx.body = { error: "Utilisateur non connecté" };
+    ctx.status = 401;
+    return;
+  }
+
+  await client.connect();
+  const usersCollection = await client.db("notes-api").collection("users");
+  const notesCollection = await client.db("notes-api").collection("notes");
+
+  let findedUser = await usersCollection.findOne({
+    username: decoded.username,
+  });
+
+  if (!findedUser) {
+    // the decoded username is note found in API
+    ctx.body = { error: null };
+    ctx.status = 400;
+    return;
+  }
+  let note = await notesCollection.findOne({
+    _id: noteID,
+  });
+  if (note) {
+    if (JSON.stringify(note.userId) != JSON.stringify(findedUser._id)) {
+      ctx.body = { error: "Accès non autorisé à cette note" };
+      ctx.status = 403;
+      return;
     }
+  } else {
+    // la note n'existe pas
+    ctx.body = { error: "Cet identifiant est inconnu" };
+    ctx.status = 404;
+    return;
+  }
+
+  const fullDate = tools.getCurrentDate();
+  let beforeNote = await notesCollection.findOneAndUpdate(
+    { _id: noteID },
+    {
+      $set: {
+        content: res.content,
+        lastUpdatedAt: fullDate,
+      },
+    }
+  );
+  if (beforeNote.value) {
+    const tmp = beforeNote.value;
+    tmp.content = res.content;
+    tmp.lastUpdatedAt = fullDate;
+    ctx.body = tmp;
+  } else {
+    ctx.body = { error: "Cet identifiant est inconnu" };
+    ctx.status = 404;
+    return;
+  }
+});
+
+router.delete("/notes/:id", async (ctx) => {
+  // id pour test : 6080722285217938b037333e
+  ctx.type = "json";
+
+  let noteID = tools.getObjectIdFromTxt(ctx.url.split("/")[2]);
+  if (!noteID) {
+    ctx.body = { error: "Cet identifiant est inconnu" };
+    ctx.status = 404;
+    return;
+  }
+
+  let decoded = await tools.decryptJwt(ctx.header.cookie.split("=")[1]);
+  if (!decoded) {
+    ctx.body = { error: "Utilisateur non connecté" };
+    ctx.status = 401;
+    return;
+  }
+
+  await client.connect();
+  const usersCollection = await client.db("notes-api").collection("users");
+  const notesCollection = await client.db("notes-api").collection("notes");
+
+  let findedUser = await usersCollection.findOne({
+    username: decoded.username,
+  });
+  if (!findedUser) {
+    // the decoded username is note found in API
+    ctx.body = { error: null };
+    ctx.status = 400;
+    return;
+  }
+
+  let note = await notesCollection.findOne({
+    _id: noteID,
+  });
+  if (note) {
+    if (note.userId != findedUser._id) {
+      ctx.body = { error: "Accès non autorisé à cette note" };
+      ctx.status = 403;
+      return;
+    }
+  } else {
+    // la note n'existe pas
+    ctx.body = { error: null };
+    ctx.status = 400;
+    return;
+  }
+
+  deletedNote = await notesCollection.findOneAndDelete({
+    _id: noteID,
+    userId: findedUser._id,
+  });
+  if (deletedNote.value) {
+    ctx.body = deletedNote.value;
+  }
 });
 
 router.get("/", async (ctx) => {
-    ctx.body = {
-        status: "success",
-        message: "hello, world!",
-    };
+  ctx.body = {
+    status: "success",
+    message: "hello, world!",
+  };
 });
 
 module.exports = router;
