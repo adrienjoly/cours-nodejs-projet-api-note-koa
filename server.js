@@ -1,13 +1,15 @@
 const Koa = require("koa");
+const koaBody = require("koa-body");
+const globals = require("./globals");
+const serverRoutes = require("./routes/routes");
+
 const app = new Koa();
+app.use(koaBody());
+app.use(serverRoutes.routes());
 
-app.use((ctx) => {
-    console.log("ctx", ctx);
-    ctx.body = "Hello World";
+const PORT = process.env.PORT || globals.PORT;
+
+const server = app.listen(PORT, () => {
+  console.log(`Server listening on port: ${PORT}`);
 });
-
-const PORT = 3000;
-
-app.listen(PORT, () => {
-    console.log("Listening on port " + PORT);
-});
+module.exports = server;
