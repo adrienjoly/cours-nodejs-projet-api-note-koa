@@ -1,16 +1,17 @@
-# Clone 
+**Clone** 
 `& git clone https://github.com/risrael-1/NodeJSProject.git`
 
-# Installation
+**Installation**
 `& npm init`
+
 `& npm install`
 
-# Lancement
+**Lancement**
 `& npm start`
 Sur le web mettre : `localhost:3000`
 
-# Rendre le code AirBnB friendly 
+**Rendre le code AirBnB friendly**
 `& npm run check`
 
-# Tester le code 
+**Tester le code**
 `& npm test`
