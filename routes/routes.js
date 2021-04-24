@@ -94,7 +94,6 @@ router.post("/signup", async (ctx) => {
     if (tempName == null) {
       let salt = await bcrypt.genSalt(10);
       let hash = await bcrypt.hashSync(res.password, salt);
-      console.log(hash);
       let insertUser = await collection.insertOne({
         username: res.name,
         password: hash,
@@ -133,14 +132,12 @@ router.put("/note", async (ctx) => {
   }
   if (res.content) {
     await client.connect();
-    const usersCollection = await client.db("notes-api").collection("users");  
+    const usersCollection = await client.db("notes-api").collection("users");
     let findedUser = await usersCollection.findOne({
       username: decoded.username,
     });
-    console.log(findedUser);
     if (!findedUser) {
       // the decoded username is note found in API
-      console.log("error : The decoded username is note found in API");
       ctx.body = { error: null };
       ctx.status = 400;
       return;
@@ -153,12 +150,42 @@ router.put("/note", async (ctx) => {
       createdAt: fullDate,
       lastUpdatedAt: null,
     });
-    console.log(insertNote.ops);
     ctx.body = insertNote.ops;
   } else {
     ctx.status = 400;
     ctx.body = JSON.parse('{"error" : "null"}');
   }
+});
+
+router.get("/note", async (ctx) => {
+  ctx.type = "json";
+  let req = JSON.stringify(ctx.request.body);
+  let res = JSON.parse(req);
+  let decoded = await tools.decryptJwt(ctx.header.cookie.split("=")[1]);
+  if (!decoded) {
+    ctx.body = { error: "Utilisateur non connecté" };
+    ctx.status = 401;
+    return;
+  }
+  await client.connect();
+  const usersCollection = await client.db("notes-api").collection("users");
+  let findedUser = await usersCollection.findOne({
+    username: decoded.username,
+  });
+  if (!findedUser) {
+    // the decoded username is note found in API
+    ctx.body = { error: null };
+    ctx.status = 400;
+    return;
+  }
+
+  const collection = client.db("notes-api").collection("notes");
+  let allNotes = await collection
+    .find({
+      userId: tools.getObjectIdFromTxt(findedUser._id),
+    })
+    .toArray();
+  ctx.body = allNotes;
 });
 
 router.patch("/notes/:id", async (ctx) => {
@@ -190,16 +217,13 @@ router.patch("/notes/:id", async (ctx) => {
 
   if (!findedUser) {
     // the decoded username is note found in API
-    console.log("error : The decoded username is note found in API");
     ctx.body = { error: null };
     ctx.status = 400;
     return;
   }
-  console.log(typeof(findedUser._id));
   let note = await notesCollection.findOne({
     _id: noteID,
   });
-  console.log(typeof(note.userId));
   if (note) {
     if (JSON.stringify(note.userId) != JSON.stringify(findedUser._id)) {
       ctx.body = { error: "Accès non autorisé à cette note" };
@@ -260,10 +284,8 @@ router.delete("/notes/:id", async (ctx) => {
   let findedUser = await usersCollection.findOne({
     username: decoded.username,
   });
-  console.log(findedUser);
   if (!findedUser) {
     // the decoded username is note found in API
-    console.log("error : The decoded username is note found in API");
     ctx.body = { error: null };
     ctx.status = 400;
     return;
@@ -280,7 +302,6 @@ router.delete("/notes/:id", async (ctx) => {
     }
   } else {
     // la note n'existe pas
-    console.log("error : la note n'existe pas");
     ctx.body = { error: null };
     ctx.status = 400;
     return;
