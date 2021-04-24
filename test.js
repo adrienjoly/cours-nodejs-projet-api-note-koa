@@ -1,18 +1,54 @@
-const fetch = require("node-fetch");
 const assert = require("assert");
+var chai = require('chai'), chaiHttp = require('chai-http');
+chai.use(chaiHttp);
 
-describe("test the PATCH rout", () => {
-  it("Should work", async () => {
-    const randomBodyContent = Math.floor(Math.random() * 10000).toString();
-    const rawResponse = await fetch(
-      "localhost:3000/notes/6080722285217938b037333e",
-      {
-        method: "PATCH",
-        body: { content: randomBodyContent },
-      }
-    );
-    rawResponse = rawResponse.json();
-    assert.strictEqual(rawResponse.content, "randomBodyContent");
-    // assert.strictEqual(1,2)
-  });
+describe("route : /", () => {
+    it("API is up", async () => {
+        chai.request("http://localhost:3000")
+        .get('/')
+        .send()
+        .end(function (err, res) {
+            assert.strictEqual(res.body.status, "success");
+        });
+    });
+});
+
+describe("route : /signin", () => {
+    it("all ok", async () => {
+        chai.request("http://localhost:3000")
+        .post('/signin')
+        .send({
+            password: 'carrot', 
+            name: 'boby'
+        })
+        .end(function (err, res) {
+            assert.strictEqual(res.status, 200);
+        });
+    });
+
+    it("password less than 4", async () => {
+        chai.request("http://localhost:3000")
+        .post('/signin')
+        .send({
+            password: 'ca', 
+            name: 'boby'
+        })
+        .end(function (err, res) {
+            console.log(res.body)
+            assert.strictEqual(res.status, 400);
+        });
+    });
+
+    it("username contains uppercase", async () => {
+        chai.request("http://localhost:3000")
+        .post('/signin')
+        .send({
+            password: 'carrote', 
+            name: 'boBy'
+        })
+        .end(function (err, res) {
+            console.log(res.body)
+            assert.strictEqual(res.status, 400);
+        });
+    });
 });
