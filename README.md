@@ -1,3 +1,6 @@
+-- Clone --
+& git clone https://github.com/risrael-1/NodeJSProject.git
+
 -- Installation --
 & npm init
 & npm install
