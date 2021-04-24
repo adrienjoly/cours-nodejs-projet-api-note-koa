@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "check": "npx eslint *.js & npx prettier --write *.js routes/*.js ",
+    "check": "npx eslint *.js & npx prettier --write *.js test/*.js routes/*.js ",
     "test": "mocha"
   },
   "repository": {

@@ -16,7 +16,6 @@ const jwtKey = globals.JWT_KEY;
 const jwtExpirySeconds = 86400; //24h * 3600(sec dans une heure)
 
 router.post("/signin", async (ctx) => {
-
   ctx.type = "json";
   ctx.status = 400;
   let req = JSON.stringify(ctx.request.body);
