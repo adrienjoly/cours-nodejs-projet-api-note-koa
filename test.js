@@ -44,7 +44,7 @@ describe("route : /signin", () => {
         .post('/signin')
         .send({
             password: 'carrote', 
-            name: 'boby'
+            name: 'boBy'
         })
         .end(function (err, res) {
             console.log(res.body)
