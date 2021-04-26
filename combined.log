@@ -1,0 +1,1063 @@
+Docker Compose is now in the Docker CLI, try `docker compose up`
+
+Attaching to nodejsproject_api_1, nodejsproject_tests_1
+[36mapi_1    |[0m npm install
+[33mtests_1  |[0m waiting for server...
+[33mtests_1  |[0m npx: installed 13 in 9.051s
+[36mapi_1    |[0m npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules/fsevents):
+[36mapi_1    |[0m npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+[36mapi_1    |[0m 
+[36mapi_1    |[0m audited 359 packages in 12.104s
+[36mapi_1    |[0m 
+[36mapi_1    |[0m 36 packages are looking for funding
+[36mapi_1    |[0m   run `npm fund` for details
+[36mapi_1    |[0m 
+[36mapi_1    |[0m found 0 vulnerabilities
+[36mapi_1    |[0m 
+[36mapi_1    |[0m npm start
+[36mapi_1    |[0m 
+[36mapi_1    |[0m > nodejsproject@1.0.0 start /home/node/app
+[36mapi_1    |[0m > node server.js
+[36mapi_1    |[0m 
+[36mapi_1    |[0m Server listening on port: 3000
+[33mtests_1  |[0m starting tests...
+[33mtests_1  |[0m 
+[33mtests_1  |[0m ℹ️ Testing API in end-to-end mode.
+[33mtests_1  |[0m WARNING: These tests will clear the database mongodb://mongo:27017/notes-api
+[33mtests_1  |[0m   ✖ 1-golden-path › POST /signup - returns a token 
+[33mtests_1  |[0m     ℹ response body from POST /signup: {
+[33mtests_1  |[0m         error: 'null',
+[33mtests_1  |[0m       }
+[33mtests_1  |[0m   ✖ 1-golden-path › POST /signup - returns a null error 
+[33mtests_1  |[0m     ℹ response body from POST /signup: {
+[33mtests_1  |[0m         error: 'null',
+[33mtests_1  |[0m       }
+[33mtests_1  |[0m   ✖ 1-golden-path › POST /signup - returns a status 200 
+[33mtests_1  |[0m     ℹ response body from POST /signup: {
+[33mtests_1  |[0m         error: 'null',
+[33mtests_1  |[0m       }
+[33mtests_1  |[0m   ✖ 1-golden-path › POST /signin on an existing user - returns a token 
+[33mtests_1  |[0m   ✖ 1-golden-path › POST /signin on an existing user - returns a null error 
+[33mtests_1  |[0m   ✖ 1-golden-path › POST /signin on an existing user - returns a status 200 
+[33mtests_1  |[0m   ✖ 1-golden-path › GET /notes of new user - returns empty array Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 1-golden-path › GET /notes of new user - returns a null error Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 1-golden-path › GET /notes of new user - returns a status 200 Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 1-golden-path › PUT /notes - returns a null error Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 1-golden-path › PUT /notes - returns a status 200 Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 1-golden-path › PUT /notes - returns the note with its content Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 1-golden-path › PUT /notes - adds a note Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 1-golden-path › PUT /notes - adds a note that has an _id Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 1-golden-path › PATCH /notes/:id - returns a null error Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 1-golden-path › PATCH /notes/:id - returns a status 200 Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 1-golden-path › PATCH /notes/:id - returns the note and its content Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 1-golden-path › PATCH /notes/:id - did update the content of the note Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 1-golden-path › DELETE /notes/:id - returns a null error Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 1-golden-path › DELETE /notes/:id - returns a status 200 Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 1-golden-path › DELETE /notes/:id - did delete the note Rejected promise returned by test
+[33mtests_1  |[0m ℹ️ Testing API in end-to-end mode.
+[33mtests_1  |[0m WARNING: These tests will clear the database mongodb://mongo:27017/notes-api
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signup without password - returns an error 
+[33mtests_1  |[0m   ✔ 2-failure-cases › POST /signup without password - returns a status 400
+[33mtests_1  |[0m   ✔ 2-failure-cases › POST /signup without password - returns no token
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signup without username - returns an error 
+[33mtests_1  |[0m   ✔ 2-failure-cases › POST /signup without username - returns a status 400
+[33mtests_1  |[0m   ✔ 2-failure-cases › POST /signup without username - returns no token
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signup with invalid username - returns an error 
+[33mtests_1  |[0m   ✔ 2-failure-cases › POST /signup with invalid username - returns a status 400
+[33mtests_1  |[0m   ✔ 2-failure-cases › POST /signup with invalid username - returns no token
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signup with username that already exists - returns an error 
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signup with username that already exists - returns a status 400 
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signup with username that already exists - returns no token 
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signin without password - returns an error 
+[33mtests_1  |[0m   ✔ 2-failure-cases › POST /signin without password - returns a status 400
+[33mtests_1  |[0m   ✔ 2-failure-cases › POST /signin without password - returns no token
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signin without username - returns an error 
+[33mtests_1  |[0m   ✔ 2-failure-cases › POST /signin without username - returns a status 400
+[33mtests_1  |[0m   ✔ 2-failure-cases › POST /signin without username - returns no token
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signin with invalid username - returns an error 
+[33mtests_1  |[0m   ✔ 2-failure-cases › POST /signin with invalid username - returns a status 400
+[33mtests_1  |[0m   ✔ 2-failure-cases › POST /signin with invalid username - returns no token
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signin with wrong username - returns an error 
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signin with wrong username - returns a status 403 
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signin with wrong username - returns no token 
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signin with wrong password - returns an error 
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signin with wrong password - returns a status 403 
+[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signin with wrong password - returns no token 
+[33mtests_1  |[0m   ✖ 2-failure-cases › GET /notes without token - returns a status 401 
+[33mtests_1  |[0m   ✖ 2-failure-cases › GET /notes with invalid token - returns a status 401 
+[33mtests_1  |[0m   ✖ 2-failure-cases › GET /notes with expired token - returns a status 401 
+[33mtests_1  |[0m   ✖ 2-failure-cases › PUT /notes with expired token - returns a status 401 
+[36mapi_1    |[0m 
+[36mapi_1    |[0m   TypeError: Cannot read property 'split' of undefined
+[36mapi_1    |[0m       at /home/node/app/routes/routes.js:203:58
+[36mapi_1    |[0m       at dispatch (/home/node/app/node_modules/koa-compose/index.js:42:32)
+[36mapi_1    |[0m       at /home/node/app/node_modules/koa-router/lib/router.js:372:16
+[36mapi_1    |[0m       at dispatch (/home/node/app/node_modules/koa-compose/index.js:42:32)
+[36mapi_1    |[0m       at /home/node/app/node_modules/koa-compose/index.js:34:12
+[36mapi_1    |[0m       at dispatch (/home/node/app/node_modules/koa-router/lib/router.js:377:31)
+[36mapi_1    |[0m       at dispatch (/home/node/app/node_modules/koa-compose/index.js:42:32)
+[36mapi_1    |[0m       at /home/node/app/node_modules/koa-body/index.js:148:14
+[36mapi_1    |[0m       at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[36mapi_1    |[0m 
+[33mtests_1  |[0m   ✖ 2-failure-cases › PATCH /notes/:id with invalid token - returns a status 401 
+[33mtests_1  |[0m   ✖ 2-failure-cases › PATCH /notes/:id with unknown note id - returns an error Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 2-failure-cases › PATCH /notes/:id with unknown note id - returns a status 404 Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 2-failure-cases › PATCH /notes/:id with note that belongs to another user - returns an error Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 2-failure-cases › PATCH /notes/:id with note that belongs to another user - returns a status 403 Rejected promise returned by test
+[36mapi_1    |[0m 
+[36mapi_1    |[0m   TypeError: Cannot read property 'split' of undefined
+[36mapi_1    |[0m       at /home/node/app/routes/routes.js:273:58
+[36mapi_1    |[0m       at dispatch (/home/node/app/node_modules/koa-compose/index.js:42:32)
+[36mapi_1    |[0m       at /home/node/app/node_modules/koa-router/lib/router.js:372:16
+[36mapi_1    |[0m       at dispatch (/home/node/app/node_modules/koa-compose/index.js:42:32)
+[36mapi_1    |[0m       at /home/node/app/node_modules/koa-compose/index.js:34:12
+[36mapi_1    |[0m       at dispatch (/home/node/app/node_modules/koa-router/lib/router.js:377:31)
+[36mapi_1    |[0m       at dispatch (/home/node/app/node_modules/koa-compose/index.js:42:32)
+[36mapi_1    |[0m       at /home/node/app/node_modules/koa-body/index.js:148:14
+[36mapi_1    |[0m       at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[36mapi_1    |[0m 
+[33mtests_1  |[0m   ✖ 2-failure-cases › DELETE /notes/:id with invalid token - returns a status 401 
+[33mtests_1  |[0m   ✖ 2-failure-cases › DELETE /notes/:id with unknown note id - returns an error Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 2-failure-cases › DELETE /notes/:id with unknown note id - returns a status 404 Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 2-failure-cases › DELETE /notes/:id with note that belongs to another user - returns an error Rejected promise returned by test
+[33mtests_1  |[0m   ✖ 2-failure-cases › DELETE /notes/:id with note that belongs to another user - returns a status 403 Rejected promise returned by test
+[33mtests_1  |[0m   ─
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › POST /signup - returns a token
+[33mtests_1  |[0m 
+[33mtests_1  |[0m     ℹ response body from POST /signup: {
+[33mtests_1  |[0m         error: 'null',
+[33mtests_1  |[0m       }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:34
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    33:   });                                                                    
+[33mtests_1  |[0m    34:   test('returns a token', (t, res) => t.is(typeof res.data.token, 'strin…
+[33mtests_1  |[0m    35:   test('returns a null error', (t, res) => t.is(res.data.error, null));  
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 'undefined'
+[33mtests_1  |[0m   + 'string'
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/1-golden-path.test.js:34:41
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › POST /signup - returns a null error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m     ℹ response body from POST /signup: {
+[33mtests_1  |[0m         error: 'null',
+[33mtests_1  |[0m       }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:35
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    34:   test('returns a token', (t, res) => t.is(typeof res.data.token, 'strin…
+[33mtests_1  |[0m    35:   test('returns a null error', (t, res) => t.is(res.data.error, null));  
+[33mtests_1  |[0m    36:   test('returns a status 200', (t, res) => t.is(res.status, 200));       
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 'null'
+[33mtests_1  |[0m   + null
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/1-golden-path.test.js:35:46
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › POST /signup - returns a status 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m     ℹ response body from POST /signup: {
+[33mtests_1  |[0m         error: 'null',
+[33mtests_1  |[0m       }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:36
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    35:   test('returns a null error', (t, res) => t.is(res.data.error, null));
+[33mtests_1  |[0m    36:   test('returns a status 200', (t, res) => t.is(res.status, 200));     
+[33mtests_1  |[0m    37: });                                                                    
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 400
+[33mtests_1  |[0m   + 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/1-golden-path.test.js:36:46
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › POST /signin on an existing user - returns a token
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:42
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    41:     const signupRes = await axios.post(`${t.context.urlPrefix}/signup`, …
+[33mtests_1  |[0m    42:     t.is(signupRes.data.error, null);                                    
+[33mtests_1  |[0m    43:     t.is(signupRes.status, 200);                                         
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 'null'
+[33mtests_1  |[0m   + null
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/1-golden-path.test.js:42:7)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › POST /signin on an existing user - returns a null error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:42
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    41:     const signupRes = await axios.post(`${t.context.urlPrefix}/signup`, …
+[33mtests_1  |[0m    42:     t.is(signupRes.data.error, null);                                    
+[33mtests_1  |[0m    43:     t.is(signupRes.status, 200);                                         
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 'null'
+[33mtests_1  |[0m   + null
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/1-golden-path.test.js:42:7)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › POST /signin on an existing user - returns a status 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:42
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    41:     const signupRes = await axios.post(`${t.context.urlPrefix}/signup`, …
+[33mtests_1  |[0m    42:     t.is(signupRes.data.error, null);                                    
+[33mtests_1  |[0m    43:     t.is(signupRes.status, 200);                                         
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 'null'
+[33mtests_1  |[0m   + null
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/1-golden-path.test.js:42:7)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › GET /notes of new user - returns empty array
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:58
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    57:   });                                                                    
+[33mtests_1  |[0m    58:   test('returns empty array', (t, res) => t.deepEqual(res.data.notes, []…
+[33mtests_1  |[0m    59:   test('returns a null error', (t, res) => t.is(res.data.error, null));  
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/1-golden-path.test.js:58:59
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › GET /notes of new user - returns a null error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:59
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    58:   test('returns empty array', (t, res) => t.deepEqual(res.data.notes, []…
+[33mtests_1  |[0m    59:   test('returns a null error', (t, res) => t.is(res.data.error, null));  
+[33mtests_1  |[0m    60:   test('returns a status 200', (t, res) => t.is(res.status, 200));       
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/1-golden-path.test.js:59:53
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › GET /notes of new user - returns a status 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:60
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    59:   test('returns a null error', (t, res) => t.is(res.data.error, null));
+[33mtests_1  |[0m    60:   test('returns a status 200', (t, res) => t.is(res.status, 200));     
+[33mtests_1  |[0m    61: });                                                                    
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'status\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/1-golden-path.test.js:60:53
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › PUT /notes - returns a null error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:71
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    70:   });                                                                    
+[33mtests_1  |[0m    71:   test('returns a null error', (t, { putRes }) => t.is(putRes.data.error…
+[33mtests_1  |[0m    72:   test('returns a status 200', (t, { putRes }) => t.is(putRes.status, 20…
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/1-golden-path.test.js:71:63
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › PUT /notes - returns a status 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:72
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    71:   test('returns a null error', (t, { putRes }) => t.is(putRes.data.error…
+[33mtests_1  |[0m    72:   test('returns a status 200', (t, { putRes }) => t.is(putRes.status, 20…
+[33mtests_1  |[0m    73:   test('returns the note with its content', (t, { putRes }) => t.is(putR…
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'status\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/1-golden-path.test.js:72:63
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › PUT /notes - returns the note with its content
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:73
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    72:   test('returns a status 200', (t, { putRes }) => t.is(putRes.status, 20…
+[33mtests_1  |[0m    73:   test('returns the note with its content', (t, { putRes }) => t.is(putR…
+[33mtests_1  |[0m    74:   setup((t, { token }) => { // eslint-disable-line arrow-body-style      
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/1-golden-path.test.js:73:76
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › PUT /notes - adds a note
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:78
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    77:   });                                                                    
+[33mtests_1  |[0m    78:   test('adds a note', (t, { data }) => t.is(data.notes[0].content, conte…
+[33mtests_1  |[0m    79:   test('adds a note that has an _id', (t, { data }) => t.is(typeof data.…
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot destructure property \'data\' of \'undefined\' as it is undefined.',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/1-golden-path.test.js:78:29
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › PUT /notes - adds a note that has an _id
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:79
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    78:   test('adds a note', (t, { data }) => t.is(data.notes[0].content, conte…
+[33mtests_1  |[0m    79:   test('adds a note that has an _id', (t, { data }) => t.is(typeof data.…
+[33mtests_1  |[0m    80: });                                                                      
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot destructure property \'data\' of \'undefined\' as it is undefined.',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/1-golden-path.test.js:79:45
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › PATCH /notes/:id - returns a null error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:89
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    88:     const res = await axios.put(`${t.context.urlPrefix}/notes`, { conten…
+[33mtests_1  |[0m    89:     const id = res.data.note._id; // eslint-disable-line no-underscore-d…
+[33mtests_1  |[0m    90:     t.is(res.data.note.content, initialContent);                         
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/1-golden-path.test.js:89:20)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › PATCH /notes/:id - returns a status 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:89
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    88:     const res = await axios.put(`${t.context.urlPrefix}/notes`, { conten…
+[33mtests_1  |[0m    89:     const id = res.data.note._id; // eslint-disable-line no-underscore-d…
+[33mtests_1  |[0m    90:     t.is(res.data.note.content, initialContent);                         
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/1-golden-path.test.js:89:20)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › PATCH /notes/:id - returns the note and its content
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:89
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    88:     const res = await axios.put(`${t.context.urlPrefix}/notes`, { conten…
+[33mtests_1  |[0m    89:     const id = res.data.note._id; // eslint-disable-line no-underscore-d…
+[33mtests_1  |[0m    90:     t.is(res.data.note.content, initialContent);                         
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/1-golden-path.test.js:89:20)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › PATCH /notes/:id - did update the content of the note
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:89
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    88:     const res = await axios.put(`${t.context.urlPrefix}/notes`, { conten…
+[33mtests_1  |[0m    89:     const id = res.data.note._id; // eslint-disable-line no-underscore-d…
+[33mtests_1  |[0m    90:     t.is(res.data.note.content, initialContent);                         
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/1-golden-path.test.js:89:20)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › DELETE /notes/:id - returns a null error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:113
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    112:     const res = await axios.put(`${t.context.urlPrefix}/notes`, { conte…
+[33mtests_1  |[0m    113:     const id = res.data.note._id; // eslint-disable-line no-underscore-…
+[33mtests_1  |[0m    114:     // 2. delete the note                                               
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/1-golden-path.test.js:113:20)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › DELETE /notes/:id - returns a status 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:113
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    112:     const res = await axios.put(`${t.context.urlPrefix}/notes`, { conte…
+[33mtests_1  |[0m    113:     const id = res.data.note._id; // eslint-disable-line no-underscore-…
+[33mtests_1  |[0m    114:     // 2. delete the note                                               
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/1-golden-path.test.js:113:20)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   1-golden-path › DELETE /notes/:id - did delete the note
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/1-golden-path.test.js:113
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    112:     const res = await axios.put(`${t.context.urlPrefix}/notes`, { conte…
+[33mtests_1  |[0m    113:     const id = res.data.note._id; // eslint-disable-line no-underscore-…
+[33mtests_1  |[0m    114:     // 2. delete the note                                               
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/1-golden-path.test.js:113:20)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signup without password - returns an error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:22
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    21:   setup((t) => axios.post(`${t.context.urlPrefix}/signup`));             
+[33mtests_1  |[0m    22:   test('returns an error', (t, res) => t.is(res.data.error, 'Le mot de p…
+[33mtests_1  |[0m    23:   test('returns a status 400', (t, res) => t.is(res.status, 400));       
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 'null'
+[33mtests_1  |[0m   + 'Le mot de passe doit contenir au moins 4 caractères'
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:22:42
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signup without username - returns an error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:29
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    28:   setup((t) => axios.post(`${t.context.urlPrefix}/signup`, { password: '…
+[33mtests_1  |[0m    29:   test('returns an error', (t, res) => t.is(res.data.error, 'Votre ident…
+[33mtests_1  |[0m    30:   test('returns a status 400', (t, res) => t.is(res.status, 400));       
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 'null'
+[33mtests_1  |[0m   + 'Votre identifiant doit contenir entre 2 et 20 caractères'
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:29:42
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signup with invalid username - returns an error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:39
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    38:   }));                                                                   
+[33mtests_1  |[0m    39:   test('returns an error', (t, res) => t.is(res.data.error, 'Votre ident…
+[33mtests_1  |[0m    40:   test('returns a status 400', (t, res) => t.is(res.status, 400));       
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 'null'
+[33mtests_1  |[0m   + 'Votre identifiant ne doit contenir que des lettres minuscules non accentuées'
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:39:42
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signup with username that already exists - returns an error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:47
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    46:     const initialRes = await axios.post(`${t.context.urlPrefix}/signup`,…
+[33mtests_1  |[0m    47:     t.is(initialRes.status, 200);                                        
+[33mtests_1  |[0m    48:     return axios.post(`${t.context.urlPrefix}/signup`, VALID_USER);      
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 400
+[33mtests_1  |[0m   + 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/2-failure-cases.test.js:47:7)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signup with username that already exists - returns a status 400
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:47
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    46:     const initialRes = await axios.post(`${t.context.urlPrefix}/signup`,…
+[33mtests_1  |[0m    47:     t.is(initialRes.status, 200);                                        
+[33mtests_1  |[0m    48:     return axios.post(`${t.context.urlPrefix}/signup`, VALID_USER);      
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 400
+[33mtests_1  |[0m   + 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/2-failure-cases.test.js:47:7)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signup with username that already exists - returns no token
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:47
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    46:     const initialRes = await axios.post(`${t.context.urlPrefix}/signup`,…
+[33mtests_1  |[0m    47:     t.is(initialRes.status, 200);                                        
+[33mtests_1  |[0m    48:     return axios.post(`${t.context.urlPrefix}/signup`, VALID_USER);      
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 400
+[33mtests_1  |[0m   + 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/2-failure-cases.test.js:47:7)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signin without password - returns an error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:57
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    56:   setup((t) => axios.post(`${t.context.urlPrefix}/signin`));             
+[33mtests_1  |[0m    57:   test('returns an error', (t, res) => t.is(res.data.error, 'Le mot de p…
+[33mtests_1  |[0m    58:   test('returns a status 400', (t, res) => t.is(res.status, 400));       
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 'null'
+[33mtests_1  |[0m   + 'Le mot de passe doit contenir au moins 4 caractères'
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:57:42
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signin without username - returns an error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:64
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    63:   setup((t) => axios.post(`${t.context.urlPrefix}/signin`, { password: '…
+[33mtests_1  |[0m    64:   test('returns an error', (t, res) => t.is(res.data.error, 'Votre ident…
+[33mtests_1  |[0m    65:   test('returns a status 400', (t, res) => t.is(res.status, 400));       
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 'null'
+[33mtests_1  |[0m   + 'Votre identifiant doit contenir entre 2 et 20 caractères'
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:64:42
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signin with invalid username - returns an error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:74
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    73:   }));                                                                   
+[33mtests_1  |[0m    74:   test('returns an error', (t, res) => t.is(res.data.error, 'Votre ident…
+[33mtests_1  |[0m    75:   test('returns a status 400', (t, res) => t.is(res.status, 400));       
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 'null'
+[33mtests_1  |[0m   + 'Votre identifiant ne doit contenir que des lettres minuscules non accentuées'
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:74:42
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signin with wrong username - returns an error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:82
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    81:     const initialRes = await axios.post(`${t.context.urlPrefix}/signup`,…
+[33mtests_1  |[0m    82:     t.is(initialRes.status, 200);                                        
+[33mtests_1  |[0m    83:     return axios.post(`${t.context.urlPrefix}/signin`, { ...VALID_USER, …
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 400
+[33mtests_1  |[0m   + 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/2-failure-cases.test.js:82:7)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signin with wrong username - returns a status 403
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:82
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    81:     const initialRes = await axios.post(`${t.context.urlPrefix}/signup`,…
+[33mtests_1  |[0m    82:     t.is(initialRes.status, 200);                                        
+[33mtests_1  |[0m    83:     return axios.post(`${t.context.urlPrefix}/signin`, { ...VALID_USER, …
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 400
+[33mtests_1  |[0m   + 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/2-failure-cases.test.js:82:7)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signin with wrong username - returns no token
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:82
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    81:     const initialRes = await axios.post(`${t.context.urlPrefix}/signup`,…
+[33mtests_1  |[0m    82:     t.is(initialRes.status, 200);                                        
+[33mtests_1  |[0m    83:     return axios.post(`${t.context.urlPrefix}/signin`, { ...VALID_USER, …
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 400
+[33mtests_1  |[0m   + 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/2-failure-cases.test.js:82:7)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signin with wrong password - returns an error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:93
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    92:     const initialRes = await axios.post(`${t.context.urlPrefix}/signup`,…
+[33mtests_1  |[0m    93:     t.is(initialRes.status, 200);                                        
+[33mtests_1  |[0m    94:     return axios.post(`${t.context.urlPrefix}/signin`, { ...VALID_USER, …
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 400
+[33mtests_1  |[0m   + 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/2-failure-cases.test.js:93:7)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signin with wrong password - returns a status 403
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:93
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    92:     const initialRes = await axios.post(`${t.context.urlPrefix}/signup`,…
+[33mtests_1  |[0m    93:     t.is(initialRes.status, 200);                                        
+[33mtests_1  |[0m    94:     return axios.post(`${t.context.urlPrefix}/signin`, { ...VALID_USER, …
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 400
+[33mtests_1  |[0m   + 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/2-failure-cases.test.js:93:7)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › POST /signin with wrong password - returns no token
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:93
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    92:     const initialRes = await axios.post(`${t.context.urlPrefix}/signup`,…
+[33mtests_1  |[0m    93:     t.is(initialRes.status, 200);                                        
+[33mtests_1  |[0m    94:     return axios.post(`${t.context.urlPrefix}/signin`, { ...VALID_USER, …
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 400
+[33mtests_1  |[0m   + 200
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/2-failure-cases.test.js:93:7)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › GET /notes without token - returns a status 401
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:104
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    103:   // test('returns an error', (t, res) => t.is(res.data.error, 'missing…
+[33mtests_1  |[0m    104:   test('returns a status 401', (t, res) => t.is(res.status, 401));      
+[33mtests_1  |[0m    105: });                                                                     
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 404
+[33mtests_1  |[0m   + 401
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:104:46
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › GET /notes with invalid token - returns a status 401
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:110
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    109:   // test('returns an error', (t, res) => t.is(res.data.error, 'jwt mal…
+[33mtests_1  |[0m    110:   test('returns a status 401', (t, res) => t.is(res.status, 401));      
+[33mtests_1  |[0m    111: });                                                                     
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 404
+[33mtests_1  |[0m   + 401
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:110:46
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › GET /notes with expired token - returns a status 401
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:116
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    115:   // test('returns an error', (t, res) => t.is(res.data.error, 'invalid…
+[33mtests_1  |[0m    116:   test('returns a status 401', (t, res) => t.is(res.status, 401));      
+[33mtests_1  |[0m    117: });                                                                     
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 404
+[33mtests_1  |[0m   + 401
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:116:46
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › PUT /notes with expired token - returns a status 401
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:122
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    121:   // test('returns an error', (t, res) => t.is(res.data.error, 'invalid…
+[33mtests_1  |[0m    122:   test('returns a status 401', (t, res) => t.is(res.status, 401));      
+[33mtests_1  |[0m    123: });                                                                     
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 404
+[33mtests_1  |[0m   + 401
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:122:46
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › PATCH /notes/:id with invalid token - returns a status 401
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:128
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    127:   // test('returns an error', (t, res) => t.is(res.data.error, 'Utilisa…
+[33mtests_1  |[0m    128:   test('returns a status 401', (t, res) => t.is(res.status, 401));      
+[33mtests_1  |[0m    129: });                                                                     
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 500
+[33mtests_1  |[0m   + 401
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:128:46
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › PATCH /notes/:id with unknown note id - returns an error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:136
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    135:   });                                                                   
+[33mtests_1  |[0m    136:   test('returns an error', (t, res) => t.is(res.data.error, 'Cet identi…
+[33mtests_1  |[0m    137:   test('returns a status 404', (t, res) => t.is(res.status, 404));      
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:136:49
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › PATCH /notes/:id with unknown note id - returns a status 404
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:137
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    136:   test('returns an error', (t, res) => t.is(res.data.error, 'Cet identi…
+[33mtests_1  |[0m    137:   test('returns a status 404', (t, res) => t.is(res.status, 404));      
+[33mtests_1  |[0m    138: });                                                                     
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'status\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:137:53
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › PATCH /notes/:id with note that belongs to another user - returns an error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:146
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    145:     const res = await axios.put(`${t.context.urlPrefix}/notes`, { conte…
+[33mtests_1  |[0m    146:     return { id: res.data.note._id }; // eslint-disable-line no-undersc…
+[33mtests_1  |[0m    147:   });                                                                   
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/2-failure-cases.test.js:146:22)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › PATCH /notes/:id with note that belongs to another user - returns a status 403
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:146
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    145:     const res = await axios.put(`${t.context.urlPrefix}/notes`, { conte…
+[33mtests_1  |[0m    146:     return { id: res.data.note._id }; // eslint-disable-line no-undersc…
+[33mtests_1  |[0m    147:   });                                                                   
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/2-failure-cases.test.js:146:22)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › DELETE /notes/:id with invalid token - returns a status 401
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:160
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    159:   // test('returns an error', (t, res) => t.is(res.data.error, 'Utilisa…
+[33mtests_1  |[0m    160:   test('returns a status 401', (t, res) => t.is(res.status, 401));      
+[33mtests_1  |[0m    161: });                                                                     
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Difference:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   - 500
+[33mtests_1  |[0m   + 401
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:160:46
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › DELETE /notes/:id with unknown note id - returns an error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:168
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    167:   });                                                                   
+[33mtests_1  |[0m    168:   test('returns an error', (t, res) => t.is(res.data.error, 'Cet identi…
+[33mtests_1  |[0m    169:   test('returns a status 404', (t, res) => t.is(res.status, 404));      
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:168:49
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › DELETE /notes/:id with unknown note id - returns a status 404
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:169
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    168:   test('returns an error', (t, res) => t.is(res.data.error, 'Cet identi…
+[33mtests_1  |[0m    169:   test('returns a status 404', (t, res) => t.is(res.status, 404));      
+[33mtests_1  |[0m    170: });                                                                     
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'status\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › tests/2-failure-cases.test.js:169:53
+[33mtests_1  |[0m   › tests/setup/common.js:41:12
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › DELETE /notes/:id with note that belongs to another user - returns an error
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:178
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    177:     const res = await axios.put(`${t.context.urlPrefix}/notes`, { conte…
+[33mtests_1  |[0m    178:     return { id: res.data.note._id }; // eslint-disable-line no-undersc…
+[33mtests_1  |[0m    179:   });                                                                   
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/2-failure-cases.test.js:178:22)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   2-failure-cases › DELETE /notes/:id with note that belongs to another user - returns a status 403
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   tests/2-failure-cases.test.js:178
+[33mtests_1  |[0m 
+[33mtests_1  |[0m    177:     const res = await axios.put(`${t.context.urlPrefix}/notes`, { conte…
+[33mtests_1  |[0m    178:     return { id: res.data.note._id }; // eslint-disable-line no-undersc…
+[33mtests_1  |[0m    179:   });                                                                   
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   Rejected promise returned by test. Reason:
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   TypeError {
+[33mtests_1  |[0m     message: 'Cannot read property \'data\' of undefined',
+[33mtests_1  |[0m   }
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   › Object.fct (tests/2-failure-cases.test.js:178:22)
+[33mtests_1  |[0m   › tests/setup/common.js:39:18
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   ─
+[33mtests_1  |[0m 
+[33mtests_1  |[0m   50 tests failed
+[33mnodejsproject_tests_1 exited with code 1
+[0mGracefully stopping... (press Ctrl+C again to force)
