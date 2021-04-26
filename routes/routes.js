@@ -20,17 +20,17 @@ router.post("/signin", async (ctx) => {
   ctx.status = 400;
   let req = JSON.stringify(ctx.request.body);
   let res = JSON.parse(req);
-  if (!res.name || !res.password) {
+  if (!res.username || !res.password) {
     ctx.body = JSON.parse('{"error" : "null"}');
   } else if (res.password.length < 4) {
     ctx.body = JSON.parse(
       '{"error" : "Le mot de passe doit contenir au moins 4 caractères"}'
     );
-  } else if (res.name.length < 2 || res.name.length > 20) {
+  } else if (res.username.length < 2 || res.username.length > 20) {
     ctx.body = JSON.parse(
       '{"error" : "Votre identifiant doit contenir entre 2 et 20 caractères"}'
     );
-  } else if (!/^[a-z]+$/.test(res.name)) {
+  } else if (!/^[a-z]+$/.test(res.username)) {
     ctx.body = JSON.parse(
       '{"error" : "Votre identifiant ne doit contenir que des lettres minuscules non accentuées"}'
     );
@@ -38,12 +38,12 @@ router.post("/signin", async (ctx) => {
     await client.connect();
     const collection = client.db("notes-api").collection("users");
     let tempName = await collection.findOne({
-      username: res.name,
+      username: res.username,
     });
     if (tempName != null) {
       if (await bcrypt.compare(res.password, tempName.password)) {
         ctx.status = 200;
-        const username = res.name;
+        const username = res.username;
         let options = {
           httpOnly: true,
           overwrite: true,
@@ -71,17 +71,17 @@ router.post("/signup", async (ctx) => {
   ctx.status = 400;
   let req = JSON.stringify(ctx.request.body);
   let res = JSON.parse(req);
-  if (!res.name || !res.password) {
+  if (!res.username || !res.password) {
     ctx.body = JSON.parse('{"error" : "null"}');
   } else if (res.password.length < 4) {
     ctx.body = JSON.parse(
       '{"error" : "Le mot de passe doit contenir au moins 4 caractères"}'
     );
-  } else if (res.name.length < 2 || res.name.length > 20) {
+  } else if (res.username.length < 2 || res.username.length > 20) {
     ctx.body = JSON.parse(
       '{"error" : "Votre identifiant doit contenir entre 2 et 20 caractères"}'
     );
-  } else if (!/^[a-z]+$/.test(res.name)) {
+  } else if (!/^[a-z]+$/.test(res.username)) {
     ctx.body = JSON.parse(
       '{"error" : "Votre identifiant ne doit contenir que des lettres minuscules non accentuées"}'
     );
@@ -89,17 +89,17 @@ router.post("/signup", async (ctx) => {
     await client.connect();
     const collection = client.db("notes-api").collection("users");
     let tempName = await collection.findOne({
-      username: res.name,
+      username: res.username,
     });
     if (tempName == null) {
       let salt = await bcrypt.genSalt(10);
       let hash = await bcrypt.hashSync(res.password, salt);
       let insertUser = await collection.insertOne({
-        username: res.name,
+        username: res.username,
         password: hash,
       });
       ctx.status = 200;
-      const username = res.name;
+      const username = res.username;
       let options = {
         httpOnly: true,
         overwrite: true,

@@ -3,12 +3,11 @@ Docker Compose is now in the Docker CLI, try `docker compose up`
 Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [36mapi_1    |[0m npm install
 [33mtests_1  |[0m waiting for server...
-[36mapi_1    |[0m npm WARN read-shrinkwrap This version of npm is compatible with lockfileVersion@1, but package-lock.json was generated for lockfileVersion@2. I'll try to do my best with it!
-[33mtests_1  |[0m npx: installed 13 in 10.351s
+[33mtests_1  |[0m npx: installed 13 in 10.853s
 [36mapi_1    |[0m npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules/fsevents):
 [36mapi_1    |[0m npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
 [36mapi_1    |[0m 
-[36mapi_1    |[0m audited 359 packages in 14.386s
+[36mapi_1    |[0m audited 359 packages in 14.739s
 [36mapi_1    |[0m 
 [36mapi_1    |[0m 36 packages are looking for funding
 [36mapi_1    |[0m   run `npm fund` for details
@@ -25,22 +24,42 @@ Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [33mtests_1  |[0m 
 [33mtests_1  |[0m ℹ️ Testing API in end-to-end mode.
 [33mtests_1  |[0m WARNING: These tests will clear the database mongodb://mongo:27017
-[33mtests_1  |[0m   ✖ 1-golden-path › POST /signup - returns a token 
-[33mtests_1  |[0m     ℹ response body from POST /signup: {
-[33mtests_1  |[0m         error: 'null',
-[33mtests_1  |[0m       }
+[33mtests_1  |[0m   ✔ 1-golden-path › POST /signup - returns a token (1.3s)
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [servers] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [caseTranslate] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [dbName] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [srvHost] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [credentials] is not supported
 [33mtests_1  |[0m   ✖ 1-golden-path › POST /signup - returns a null error 
 [33mtests_1  |[0m     ℹ response body from POST /signup: {
-[33mtests_1  |[0m         error: 'null',
+[33mtests_1  |[0m         error: 'Cet identifiant est déjà associé à un compte',
 [33mtests_1  |[0m       }
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [username] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the server/replset/mongos/db options are deprecated, all their options are supported at the top level of the options object [poolSize,ssl,sslValidate,sslCA,sslCert,sslKey,sslPass,sslCRL,autoReconnect,noDelay,keepAlive,keepAliveInitialDelay,connectTimeoutMS,family,socketTimeoutMS,reconnectTries,reconnectInterval,ha,haInterval,replicaSet,secondaryAcceptableLatencyMS,acceptableLatencyMS,connectWithNoPrimary,authSource,w,wtimeout,j,writeConcern,forceServerObjectId,serializeFunctions,ignoreUndefined,raw,bufferMaxEntries,readPreference,pkFactory,promiseLibrary,readConcern,maxStalenessSeconds,loggerLevel,logger,promoteValues,promoteBuffers,promoteLongs,domainsEnabled,checkServerIdentity,validateOptions,appname,auth,user,password,authMechanism,compression,fsync,readPreferenceTags,numberOfRetries,auto_reconnect,minSize,monitorCommands,retryWrites,retryReads,useNewUrlParser,useUnifiedTopology,serverSelectionTimeoutMS,useRecoveryToken,autoEncryption,driverInfo,tls,tlsInsecure,tlsinsecure,tlsAllowInvalidCertificates,tlsAllowInvalidHostnames,tlsCAFile,tlsCertificateFile,tlsCertificateKeyFile,tlsCertificateKeyFilePassword,minHeartbeatFrequencyMS,heartbeatFrequencyMS,directConnection,appName,maxPoolSize,minPoolSize,maxIdleTimeMS,waitQueueTimeoutMS]
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [mode] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [tags] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [hedge] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [preference] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [isValid] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [slaveOk] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [equals] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [toJSON] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [source] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [mechanism] is not supported
 [33mtests_1  |[0m   ✖ 1-golden-path › POST /signup - returns a status 200 
 [33mtests_1  |[0m     ℹ response body from POST /signup: {
-[33mtests_1  |[0m         error: 'null',
+[33mtests_1  |[0m         error: 'Cet identifiant est déjà associé à un compte',
 [33mtests_1  |[0m       }
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [0] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [1] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [2] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [3] is not supported
+[36mapi_1    |[0m (node:31) [MONGODB DRIVER] Warning: the options [4] is not supported
 [33mtests_1  |[0m   ✖ 1-golden-path › POST /signin on an existing user - returns a token 
 [33mtests_1  |[0m   ✖ 1-golden-path › POST /signin on an existing user - returns a null error 
 [33mtests_1  |[0m   ✖ 1-golden-path › POST /signin on an existing user - returns a status 200 
 [33mtests_1  |[0m   ✖ 1-golden-path › GET /notes of new user - returns empty array Rejected promise returned by test
+[36mapi_1    |[0m (node:31) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 newListener listeners added to [MongoClient]. Use emitter.setMaxListeners() to increase limit
 [33mtests_1  |[0m   ✖ 1-golden-path › GET /notes of new user - returns a null error Rejected promise returned by test
 [33mtests_1  |[0m   ✖ 1-golden-path › GET /notes of new user - returns a status 200 Rejected promise returned by test
 [33mtests_1  |[0m   ✖ 1-golden-path › PUT /notes - returns a null error Rejected promise returned by test
@@ -63,7 +82,7 @@ Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [33mtests_1  |[0m   ✖ 2-failure-cases › POST /signup without username - returns an error 
 [33mtests_1  |[0m   ✔ 2-failure-cases › POST /signup without username - returns a status 400
 [33mtests_1  |[0m   ✔ 2-failure-cases › POST /signup without username - returns no token
-[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signup with invalid username - returns an error 
+[33mtests_1  |[0m   ✔ 2-failure-cases › POST /signup with invalid username - returns an error
 [33mtests_1  |[0m   ✔ 2-failure-cases › POST /signup with invalid username - returns a status 400
 [33mtests_1  |[0m   ✔ 2-failure-cases › POST /signup with invalid username - returns no token
 [33mtests_1  |[0m   ✖ 2-failure-cases › POST /signup with username that already exists - returns an error 
@@ -75,7 +94,7 @@ Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [33mtests_1  |[0m   ✖ 2-failure-cases › POST /signin without username - returns an error 
 [33mtests_1  |[0m   ✔ 2-failure-cases › POST /signin without username - returns a status 400
 [33mtests_1  |[0m   ✔ 2-failure-cases › POST /signin without username - returns no token
-[33mtests_1  |[0m   ✖ 2-failure-cases › POST /signin with invalid username - returns an error 
+[33mtests_1  |[0m   ✔ 2-failure-cases › POST /signin with invalid username - returns an error
 [33mtests_1  |[0m   ✔ 2-failure-cases › POST /signin with invalid username - returns a status 400
 [33mtests_1  |[0m   ✔ 2-failure-cases › POST /signin with invalid username - returns no token
 [33mtests_1  |[0m   ✖ 2-failure-cases › POST /signin with wrong username - returns an error 
@@ -98,6 +117,7 @@ Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [36mapi_1    |[0m       at dispatch (/home/node/app/node_modules/koa-router/lib/router.js:377:31)
 [36mapi_1    |[0m       at dispatch (/home/node/app/node_modules/koa-compose/index.js:42:32)
 [36mapi_1    |[0m       at /home/node/app/node_modules/koa-body/index.js:148:14
+[36mapi_1    |[0m       at runMicrotasks (<anonymous>)
 [36mapi_1    |[0m       at processTicksAndRejections (internal/process/task_queues.js:97:5)
 [36mapi_1    |[0m 
 [33mtests_1  |[0m   ✖ 2-failure-cases › PATCH /notes/:id with invalid token - returns a status 401 
@@ -115,6 +135,7 @@ Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [36mapi_1    |[0m       at dispatch (/home/node/app/node_modules/koa-router/lib/router.js:377:31)
 [36mapi_1    |[0m       at dispatch (/home/node/app/node_modules/koa-compose/index.js:42:32)
 [36mapi_1    |[0m       at /home/node/app/node_modules/koa-body/index.js:148:14
+[36mapi_1    |[0m       at runMicrotasks (<anonymous>)
 [36mapi_1    |[0m       at processTicksAndRejections (internal/process/task_queues.js:97:5)
 [36mapi_1    |[0m 
 [33mtests_1  |[0m   ✖ 2-failure-cases › DELETE /notes/:id with invalid token - returns a status 401 
@@ -124,32 +145,10 @@ Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [33mtests_1  |[0m   ✖ 2-failure-cases › DELETE /notes/:id with note that belongs to another user - returns a status 403 Rejected promise returned by test
 [33mtests_1  |[0m   ─
 [33mtests_1  |[0m 
-[33mtests_1  |[0m   1-golden-path › POST /signup - returns a token
-[33mtests_1  |[0m 
-[33mtests_1  |[0m     ℹ response body from POST /signup: {
-[33mtests_1  |[0m         error: 'null',
-[33mtests_1  |[0m       }
-[33mtests_1  |[0m 
-[33mtests_1  |[0m   tests/1-golden-path.test.js:34
-[33mtests_1  |[0m 
-[33mtests_1  |[0m    33:   });                                                                    
-[33mtests_1  |[0m    34:   test('returns a token', (t, res) => t.is(typeof res.data.token, 'strin…
-[33mtests_1  |[0m    35:   test('returns a null error', (t, res) => t.is(res.data.error, null));  
-[33mtests_1  |[0m 
-[33mtests_1  |[0m   Difference:
-[33mtests_1  |[0m 
-[33mtests_1  |[0m   - 'undefined'
-[33mtests_1  |[0m   + 'string'
-[33mtests_1  |[0m 
-[33mtests_1  |[0m   › tests/1-golden-path.test.js:34:41
-[33mtests_1  |[0m   › tests/setup/common.js:41:12
-[33mtests_1  |[0m 
-[33mtests_1  |[0m 
-[33mtests_1  |[0m 
 [33mtests_1  |[0m   1-golden-path › POST /signup - returns a null error
 [33mtests_1  |[0m 
 [33mtests_1  |[0m     ℹ response body from POST /signup: {
-[33mtests_1  |[0m         error: 'null',
+[33mtests_1  |[0m         error: 'Cet identifiant est déjà associé à un compte',
 [33mtests_1  |[0m       }
 [33mtests_1  |[0m 
 [33mtests_1  |[0m   tests/1-golden-path.test.js:35
@@ -160,7 +159,7 @@ Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [33mtests_1  |[0m 
 [33mtests_1  |[0m   Difference:
 [33mtests_1  |[0m 
-[33mtests_1  |[0m   - 'null'
+[33mtests_1  |[0m   - 'Cet identifiant est déjà associé à un compte'
 [33mtests_1  |[0m   + null
 [33mtests_1  |[0m 
 [33mtests_1  |[0m   › tests/1-golden-path.test.js:35:46
@@ -171,7 +170,7 @@ Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [33mtests_1  |[0m   1-golden-path › POST /signup - returns a status 200
 [33mtests_1  |[0m 
 [33mtests_1  |[0m     ℹ response body from POST /signup: {
-[33mtests_1  |[0m         error: 'null',
+[33mtests_1  |[0m         error: 'Cet identifiant est déjà associé à un compte',
 [33mtests_1  |[0m       }
 [33mtests_1  |[0m 
 [33mtests_1  |[0m   tests/1-golden-path.test.js:36
@@ -200,7 +199,7 @@ Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [33mtests_1  |[0m 
 [33mtests_1  |[0m   Difference:
 [33mtests_1  |[0m 
-[33mtests_1  |[0m   - 'null'
+[33mtests_1  |[0m   - 'Cet identifiant est déjà associé à un compte'
 [33mtests_1  |[0m   + null
 [33mtests_1  |[0m 
 [33mtests_1  |[0m   › Object.fct (tests/1-golden-path.test.js:42:7)
@@ -218,7 +217,7 @@ Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [33mtests_1  |[0m 
 [33mtests_1  |[0m   Difference:
 [33mtests_1  |[0m 
-[33mtests_1  |[0m   - 'null'
+[33mtests_1  |[0m   - 'Cet identifiant est déjà associé à un compte'
 [33mtests_1  |[0m   + null
 [33mtests_1  |[0m 
 [33mtests_1  |[0m   › Object.fct (tests/1-golden-path.test.js:42:7)
@@ -236,7 +235,7 @@ Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [33mtests_1  |[0m 
 [33mtests_1  |[0m   Difference:
 [33mtests_1  |[0m 
-[33mtests_1  |[0m   - 'null'
+[33mtests_1  |[0m   - 'Cet identifiant est déjà associé à un compte'
 [33mtests_1  |[0m   + null
 [33mtests_1  |[0m 
 [33mtests_1  |[0m   › Object.fct (tests/1-golden-path.test.js:42:7)
@@ -565,24 +564,6 @@ Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [33mtests_1  |[0m 
 [33mtests_1  |[0m 
 [33mtests_1  |[0m 
-[33mtests_1  |[0m   2-failure-cases › POST /signup with invalid username - returns an error
-[33mtests_1  |[0m 
-[33mtests_1  |[0m   tests/2-failure-cases.test.js:39
-[33mtests_1  |[0m 
-[33mtests_1  |[0m    38:   }));                                                                   
-[33mtests_1  |[0m    39:   test('returns an error', (t, res) => t.is(res.data.error, 'Votre ident…
-[33mtests_1  |[0m    40:   test('returns a status 400', (t, res) => t.is(res.status, 400));       
-[33mtests_1  |[0m 
-[33mtests_1  |[0m   Difference:
-[33mtests_1  |[0m 
-[33mtests_1  |[0m   - 'null'
-[33mtests_1  |[0m   + 'Votre identifiant ne doit contenir que des lettres minuscules non accentuées'
-[33mtests_1  |[0m 
-[33mtests_1  |[0m   › tests/2-failure-cases.test.js:39:42
-[33mtests_1  |[0m   › tests/setup/common.js:41:12
-[33mtests_1  |[0m 
-[33mtests_1  |[0m 
-[33mtests_1  |[0m 
 [33mtests_1  |[0m   2-failure-cases › POST /signup with username that already exists - returns an error
 [33mtests_1  |[0m 
 [33mtests_1  |[0m   tests/2-failure-cases.test.js:47
@@ -669,24 +650,6 @@ Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [33mtests_1  |[0m   + 'Votre identifiant doit contenir entre 2 et 20 caractères'
 [33mtests_1  |[0m 
 [33mtests_1  |[0m   › tests/2-failure-cases.test.js:64:42
-[33mtests_1  |[0m   › tests/setup/common.js:41:12
-[33mtests_1  |[0m 
-[33mtests_1  |[0m 
-[33mtests_1  |[0m 
-[33mtests_1  |[0m   2-failure-cases › POST /signin with invalid username - returns an error
-[33mtests_1  |[0m 
-[33mtests_1  |[0m   tests/2-failure-cases.test.js:74
-[33mtests_1  |[0m 
-[33mtests_1  |[0m    73:   }));                                                                   
-[33mtests_1  |[0m    74:   test('returns an error', (t, res) => t.is(res.data.error, 'Votre ident…
-[33mtests_1  |[0m    75:   test('returns a status 400', (t, res) => t.is(res.status, 400));       
-[33mtests_1  |[0m 
-[33mtests_1  |[0m   Difference:
-[33mtests_1  |[0m 
-[33mtests_1  |[0m   - 'null'
-[33mtests_1  |[0m   + 'Votre identifiant ne doit contenir que des lettres minuscules non accentuées'
-[33mtests_1  |[0m 
-[33mtests_1  |[0m   › tests/2-failure-cases.test.js:74:42
 [33mtests_1  |[0m   › tests/setup/common.js:41:12
 [33mtests_1  |[0m 
 [33mtests_1  |[0m 
@@ -1059,6 +1022,6 @@ Attaching to nodejsproject_api_1, nodejsproject_tests_1
 [33mtests_1  |[0m 
 [33mtests_1  |[0m   ─
 [33mtests_1  |[0m 
-[33mtests_1  |[0m   50 tests failed
+[33mtests_1  |[0m   47 tests failed
 [33mnodejsproject_tests_1 exited with code 1
 [0mGracefully stopping... (press Ctrl+C again to force)
