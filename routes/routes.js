@@ -295,7 +295,7 @@ router.delete("/notes/:id", async (ctx) => {
     _id: noteID,
   });
   if (note) {
-    if (note.userId != findedUser._id) {
+    if (JSON.stringify(note.userId) != JSON.stringify(findedUser._id)) {
       ctx.body = { error: "Accès non autorisé à cette note" };
       ctx.status = 403;
       return;
